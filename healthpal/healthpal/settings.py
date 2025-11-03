@@ -21,8 +21,7 @@ environ.Env.read_env(BASE_DIR / '.env')
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
 # هاي هي قائمة "التطبيقات" اللي رح نستخدمها
@@ -38,9 +37,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_spectacular',
+    
+   'users.apps.UsersConfig',
 
-    # تطبيقات المشروع (اللي رح نبنيها)
-    # 'users.apps.UsersConfig', # رح نضيفها كمان شوي
 ]
 
 MIDDLEWARE = [
@@ -148,3 +147,5 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
 }
+
+AUTH_USER_MODEL = 'users.User'

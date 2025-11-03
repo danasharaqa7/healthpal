@@ -19,8 +19,7 @@ services:
       - db
     # *** السطر الجديد والمؤقت ***
     # هذا السطر بخلي الحاوية "عايشة" عشان نقدر ندخل عليها
-    command: sleep infinity
-
+    command: sh -c "sleep 10 && python manage.py runserver 0.0.0.0:8000"
   # الخدمة الثانية: قاعدة البيانات (MySQL)
   db:
     # استخدم صورة MySQL جاهزة
