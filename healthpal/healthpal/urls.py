@@ -31,7 +31,7 @@ urlpatterns = [
     path('api/v1/auth/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     # POST /api/v1/auth/refresh/
     path('api/v1/auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-
+    path('api/v1/', include('consultations.urls')),
     # 3. (v2.0) روابط الـ Swagger (التوثيق الآلي)
     # (مطابق لمتطلبات الدكتور [cite: 29])
     # GET /api/schema/
@@ -40,4 +40,6 @@ urlpatterns = [
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     # GET /api/schema/redoc/
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    path('api/v1/sponsorship/', include('sponsorships.urls')),
+
 ]
