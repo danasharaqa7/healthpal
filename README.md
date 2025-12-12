@@ -12,15 +12,22 @@ It streamlines consultations, inventory management, sponsorships, and support se
 
 ---
 
-## 📌 Table of Contents
-- [🌟 About the Project](#-about-the-project)
-- [🚀 Core Features](#-core-features)
-- [👥 User Roles](#-user-roles)
-- [🛠 Technologies Used](#-technologies-used)
-- [⚙️ Getting Started](#️-getting-started)
-- [📝 API Documentation](#-api-documentation)
-- [📸 Demo](#-demo)
-- [👩‍💻 Team](#-team)
+<details>
+  <summary><strong>📌 Table of Contents</strong></summary>
+
+  <ul>
+    <li>🌟 <a href="#-about-the-project">About the Project</a></li>
+    <li>🚀 <a href="#-core-features">Core Features</a></li>
+    <li>👥 <a href="#-user-roles">User Roles</a></li>
+    <li>🛠️ <a href="#-technologies-used">Technologies Used</a></li>
+    <li>⚙️ <a href="#-getting-started">Getting Started</a></li>
+    <li>📝 <a href="#-api-documentation">API Documentation</a></li>
+    <li>📸 <a href="#-demo">Demo</a></li>
+    <li>👩‍💻 <a href="#-team">Team</a></li>
+  </ul>
+
+</details>
+
 
 ---
 
@@ -96,7 +103,7 @@ cd healthpal
 Create a .env file in the project root:
 ```bash
 env
-Copy code
+
 DEBUG=True
 SECRET_KEY=your_secret_key
 
@@ -109,17 +116,17 @@ DB_PORT=3306
 #### 3️⃣ Build & run containers
 
 ```bash
-Copy code
+
 docker compose up --build
 ```
 #### 4️⃣ Apply migrations
 ```bash
-Copy code
+
 docker compose exec backend python manage.py migrate
 ```
 #### 5️⃣ Create superuser
 ```bash
-Copy code
+
 docker compose exec backend python manage.py createsuperuser
 ```
 #### 6️⃣ Access the application
