@@ -19,7 +19,7 @@ from drf_spectacular.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # --- (جديد) الروابط تاعت الـ API ---
+     # --- (جديد) الروابط تاعت الـ API ---
 
     # 1. روابط الـ users (Register, Me)
     # رح يضيف /api/v1/auth/register/ و /api/v1/auth/me/
@@ -42,4 +42,7 @@ urlpatterns = [
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     path('api/v1/sponsorship/', include('sponsorships.urls')),
     path('api/v1/inventory/', include('inventory.urls')),
+    path('api/v1/education/', include('education.urls')),
+    path('api/v1/support/', include('support.urls')),
+    path('api/v1/ngo/', include('ngo.urls')),
 ]
