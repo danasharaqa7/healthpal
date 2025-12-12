@@ -84,9 +84,10 @@ The system follows **best practices in Advanced Software Engineering**, emphasiz
 ```bash
 git clone https://github.com/danasharaqa7/healthpal.git
 cd healthpal
-2️⃣ Create .env file
+```
+#### 2️⃣ Create .env file
 Create a .env file in the project root:
-
+```bash
 env
 Copy code
 DEBUG=True
@@ -97,19 +98,20 @@ DB_USER=healthpal_user
 DB_PASSWORD=your_password
 DB_HOST=db
 DB_PORT=3306
-3️⃣ Build & run containers
+```
+#### 3️⃣ Build & run containers
 bash
 Copy code
 docker compose up --build
-4️⃣ Apply migrations
+#### 4️⃣ Apply migrations
 bash
 Copy code
 docker compose exec backend python manage.py migrate
-5️⃣ Create superuser
+#### 5️⃣ Create superuser
 bash
 Copy code
 docker compose exec backend python manage.py createsuperuser
-6️⃣ Access the application
+#### 6️⃣ Access the application
 Admin Panel: http://localhost:8000/admin
 
 API Base URL: http://localhost:8000/api
