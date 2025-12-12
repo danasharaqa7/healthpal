@@ -12,7 +12,6 @@
 
 <p align="center">
   👾 <a href="#">View Demo</a> &nbsp;&nbsp; | &nbsp;&nbsp;
-  🐞 <a href="#">Report Bug</a>
 </p>
 
 ---
