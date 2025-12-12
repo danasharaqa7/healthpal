@@ -1,85 +1,92 @@
-from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
-from .models import User, Role, UserRole
+from django.urls import reverse
+from .models import HealthGuide, HealthAlert, Webinar
+from django.utils import timezone
 
-class UserTests(APITestCase):
+class EducationTests(APITestCase):
     
     def setUp(self):
         """
-        تجهيز البيانات قبل كل فحص (هذه الدالة تعمل أوتوماتيكياً).
+        تجهيز بيانات وهمية قبل كل اختبار
         """
-        # 1. ننشئ الصلاحيات الأساسية في داتابيس الفحص
-        self.patient_role = Role.objects.create(name='PATIENT')
-        self.doctor_role = Role.objects.create(name='DOCTOR')
-
-        # 2. ننشئ مستخدم تجريبي للفحص
-        self.user = User.objects.create_user(
-            email='testuser@example.com',
-            password='testpassword123',
-            first_name='Test',
-            last_name='User'
+        # 1. إنشاء دليل صحي (Guide)
+        self.guide1 = HealthGuide.objects.create(
+            title="دليل التغذية",
+            content="محتوى عن التغذية السليمة...",
+            category="NUTRITION",
+            is_visual=False
         )
-        # نعطيه صلاحية مريض
-        UserRole.objects.create(user=self.user, role=self.patient_role)
+        self.guide2 = HealthGuide.objects.create(
+            title="الإسعافات الأولية",
+            content="كيف تتصرف في الطوارئ...",
+            category="FIRST_AID",
+            is_visual=True
+        )
 
-        # 3. نحفظ الروابط (URLs) اللي بدنا نفحصها
-        self.register_url = reverse('register') # /api/v1/auth/register/
-        self.me_url = reverse('user-me')        # /api/v1/auth/me/
+        # 2. إنشاء تنبيهات صحية (Alerts)
+        # واحد نشط وواحد غير نشط عشان نفحص الفلتر
+        self.active_alert = HealthAlert.objects.create(
+            title="تنبيه كورونا",
+            message="ارتفاع الحالات...",
+            severity="HIGH",
+            is_active=True
+        )
+        self.inactive_alert = HealthAlert.objects.create(
+            title="تنبيه قديم",
+            message="انتهت الموجة",
+            severity="LOW",
+            is_active=False
+        )
 
-    def test_registration_success(self):
-        """
-        فحص 1: هل التسجيل يعمل بشكل صحيح؟
-        """
-        data = {
-            "email": "newuser@example.com",
-            "password": "newpassword123",
-            "first_name": "New",
-            "last_name": "User",
-            "roles": [self.patient_role.id] # بنبعت رقم الرول
-        }
-        response = self.client.post(self.register_url, data, format='json')
-        
-        # لازم النتيجة تكون 201 Created
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        # لازم الإيميل يكون موجود في الرد
-        self.assertEqual(response.data['email'], "newuser@example.com")
+        # 3. إنشاء ندوة (Webinar)
+        self.webinar = Webinar.objects.create(
+            title="الصحة النفسية في الحروب",
+            description="نقاش مفتوح...",
+            speaker="د. أحمد",
+            date_time=timezone.now(),
+            meeting_link="http://zoom.us/j/123456"
+        )
 
-    def test_registration_duplicate_email(self):
-        """
-        فحص 2: هل يمنع النظام تسجيل نفس الإيميل مرتين؟
-        """
-        data = {
-            "email": "testuser@example.com", # هذا الإيميل موجود أصلاً (أنشأناه في setUp)
-            "password": "anotherpassword",
-            "first_name": "Another",
-            "last_name": "User",
-            "roles": [self.patient_role.id]
-        }
-        response = self.client.post(self.register_url, data, format='json')
-        
-        # لازم النتيجة تكون 400 Bad Request
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        # الروابط (URLs)
+        self.guides_url = reverse('health-guides')   # /api/v1/education/guides/
+        self.alerts_url = reverse('health-alerts')   # /api/v1/education/alerts/
+        self.webinars_url = reverse('webinars')      # /api/v1/education/webinars/
 
-    def test_get_me_authenticated(self):
+    def test_list_health_guides(self):
         """
-        فحص 3: هل يستطيع المستخدم المسجل رؤية بياناته؟
+        فحص 1: هل يتم عرض الأدلة الصحية للجميع؟
         """
-        # بنعمل "تسجيل دخول وهمي" (Force Authenticate)
-        self.client.force_authenticate(user=self.user)
-        
-        response = self.client.get(self.me_url)
-        
-        # لازم النتيجة تكون 200 OK
+        response = self.client.get(self.guides_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['email'], self.user.email)
+        self.assertEqual(len(response.data), 2) # لازم يرجع 2
 
-    def test_get_me_unauthenticated(self):
+    def test_search_health_guides(self):
         """
-        فحص 4: هل يُمنع الغريب من رؤية البيانات؟
+        فحص 2: هل البحث (SearchFilter) يعمل؟
         """
-        # ما عملنا login هون
-        response = self.client.get(self.me_url)
+        # نبحث عن كلمة "تغذية"
+        response = self.client.get(self.guides_url, {'search': 'التغذية'})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)
+        self.assertEqual(response.data[0]['title'], "دليل التغذية")
+
+    def test_list_only_active_alerts(self):
+        """
+        فحص 3: هل يعرض النظام التنبيهات النشطة فقط؟
+        """
+        response = self.client.get(self.alerts_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         
-        # لازم النتيجة تكون 401 Unauthorized
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        # لازم يرجع 1 بس (لأنه الثاني is_active=False)
+        self.assertEqual(len(response.data), 1)
+        self.assertEqual(response.data[0]['title'], "تنبيه كورونا")
+
+    def test_list_webinars(self):
+        """
+        فحص 4: هل يتم عرض الندوات؟
+        """
+        response = self.client.get(self.webinars_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)
+        self.assertEqual(response.data[0]['speaker'], "د. أحمد")
