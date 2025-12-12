@@ -1,11 +1,8 @@
 <h1 align="center">🩺 HealthPal – Digital Healthcare Platform</h1>
 
 <p align="center">
-<strong>HealthPal</strong> is a digital healthcare backend platform designed to support and strengthen healthcare services in Palestine, especially in environments facing limited resources and system disruptions.  
-The platform provides a unified and secure digital infrastructure for medical consultations, treatment sponsorships, medication coordination, and community health support.
-<br/><br/>
-HealthPal connects patients, doctors, donors, NGOs, and healthcare administrators through scalable APIs, enabling transparent service workflows, efficient resource management, and improved access to essential medical care.  
-Built with a focus on reliability, modularity, and security, the system aims to leverage technology to enhance healthcare accessibility and resilience within the Palestinian context.
+HealthPal is a digital healthcare backend platform designed to support medical and humanitarian services in Palestine.
+It streamlines consultations, inventory management, sponsorships, and support services through secure and scalable digital solutions.
 </p>
 
 
@@ -28,10 +25,15 @@ Built with a focus on reliability, modularity, and security, the system aims to 
 ---
 
 ## 🌟 About the Project
-HealthPal is a backend healthcare platform built to support medical and humanitarian services through a clean, layered architecture.  
-It enables secure interactions between doctors, patients, sponsors, and administrators while ensuring transparency, role-based access control, and efficient service workflows.
 
-The system follows **best practices in Advanced Software Engineering**, emphasizing modularity, scalability, and maintainability.
+HealthPal is a digital healthcare backend platform developed to support medical and humanitarian services in Palestine through a secure, scalable, and well-structured system.
+
+The platform enables controlled and transparent interactions between multiple stakeholders, including **patients, doctors, administrators, sponsors, and support organizations**, while ensuring role-based access control and data integrity. HealthPal is designed to streamline core healthcare workflows such as medical consultations, inventory and resource management, sponsorships, and support services.
+
+The system follows **Advanced Software Engineering best practices**, adopting a clean, modular, and layered architecture that promotes maintainability, scalability, and ease of future extension. Each feature is implemented as an independent module, allowing the platform to evolve without impacting existing components.
+
+HealthPal aims to provide a reliable digital healthcare foundation tailored to the Palestinian context, supporting sustainable healthcare operations and improving access to essential medical services through technology.
+
 
 ---
 
