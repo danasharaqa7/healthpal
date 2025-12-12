@@ -72,10 +72,38 @@ HealthPal aims to provide a reliable digital healthcare foundation tailored to t
 ---
 
 ## 👥 User Roles
-👤 **Patient** – Requests consultations and support services  
-👨‍⚕️ **Doctor** – Manages availability and consultations  
-🎗 **Sponsor** – Supports cases financially  
-🔧 **Admin** – Oversees users, services, and platform data  
+
+HealthPal adopts a **Role-Based Access Control (RBAC)** model, where logical role separation is enforced at the application level to ensure clarity, security, and controlled user interactions.
+
+👤 **Patient**  
+- Requests medical consultations  
+- Submits medical inventory requests  
+- Accesses support and humanitarian services  
+
+👨‍⚕️ **Doctor**  
+- Manages availability slots  
+- Conducts medical consultations  
+- Can be local or international  
+- Requires admin verification  
+
+🎗 **Sponsor / Donor**  
+- Supports medical cases financially  
+- Tracks donations and expense receipts  
+
+🏥 **NGO Staff**  
+- Manages medical inventory and resources  
+- Reviews and fulfills item requests  
+- Oversees sponsorship cases  
+
+🆘 **Support Agent**  
+- Handles support and humanitarian service requests  
+- Provides assistance for sensitive cases  
+
+🔧 **Admin**  
+- Full system access  
+- Manages users and roles  
+- Verifies doctors and NGOs  
+- Oversees platform operations  
 
 ---
 
@@ -102,8 +130,6 @@ cd healthpal
 #### 2️⃣ Create .env file
 Create a .env file in the project root:
 ```bash
-env
-
 DEBUG=True
 SECRET_KEY=your_secret_key
 
@@ -155,13 +181,14 @@ Get a firsthand look at **HealthPal** in action 🚀
 👉 **View Demo:**  
 [Watch the demo video](https://drive.google.com/drive/folders/18fRbzJmQLBays6ecs-vQwiIg_OGVRoZ1?usp=sharing)
 
+
 ## 👩‍💻 Team
 
 - **Dana Sharaqa**  
   📧 [danasharaqan1@gmail.com](mailto:danasharaqan1@gmail.com)
 
 - **Tala Alhendi**  
-  📧 [talaalhendiuni4@gmail.com.com](mailto:talaalhendiuni4@gmail.com)
+  📧 [talaalhendiuni4@gmail.com](mailto:talaalhendiuni4@gmail.com)
 
 - **Mustafa Ahmad**  
   📧 [3tnawi.3tm@gmail.com](mailto:3tnawi.3tm@gmail.com)
