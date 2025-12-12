@@ -16,3 +16,6 @@ drf-spectacular
 # Testing & Quality
 pytest-django
 flake8
+
+# External API
+requests

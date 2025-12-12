@@ -40,6 +40,11 @@ INSTALLED_APPS = [
     
    'users.apps.UsersConfig',
    'consultations.apps.ConsultationsConfig', 
+   'sponsorships.apps.SponsorshipsConfig',
+   'inventory.apps.InventoryConfig', 
+   'education.apps.EducationConfig',
+   'support.apps.SupportConfig',
+   'ngo.apps.NgoConfig',
 
 ]
 

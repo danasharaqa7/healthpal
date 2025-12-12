@@ -1,0 +1,1602 @@
+openapi: 3.0.3
+info:
+  title: HealthPal API
+  version: 1.0.0
+  description: Comprehensive digital healthcare platform for Palestine.
+paths:
+  /api/v1/auth/login/:
+    post:
+      operationId: v1_auth_login_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+  /api/v1/auth/me/:
+    get:
+      operationId: v1_auth_me_retrieve
+      description: |-
+        View لجلب (GET) أو تعديل (PATCH) بيانات المستخدم الحالي.
+        (Endpoint: GET/PATCH /api/v1/users/me).
+        (مطابق لتصميم v2.0 ملف 12، [cite: 567, 569])
+      tags:
+      - v1
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDisplay'
+          description: ''
+    put:
+      operationId: v1_auth_me_update
+      description: |-
+        View لجلب (GET) أو تعديل (PATCH) بيانات المستخدم الحالي.
+        (Endpoint: GET/PATCH /api/v1/users/me).
+        (مطابق لتصميم v2.0 ملف 12، [cite: 567, 569])
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDisplay'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserDisplay'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserDisplay'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDisplay'
+          description: ''
+    patch:
+      operationId: v1_auth_me_partial_update
+      description: |-
+        View لجلب (GET) أو تعديل (PATCH) بيانات المستخدم الحالي.
+        (Endpoint: GET/PATCH /api/v1/users/me).
+        (مطابق لتصميم v2.0 ملف 12، [cite: 567, 569])
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUserDisplay'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUserDisplay'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUserDisplay'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDisplay'
+          description: ''
+  /api/v1/auth/refresh/:
+    post:
+      operationId: v1_auth_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /api/v1/auth/register/:
+    post:
+      operationId: v1_auth_register_create
+      description: |-
+        View لتسجيل مستخدم جديد (Endpoint: POST /api/v1/auth/register).
+        (مطابق لتصميم v2.0 ملف 12، [cite: 559])
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistration'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserRegistration'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserRegistration'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRegistration'
+          description: ''
+  /api/v1/consultations/:
+    get:
+      operationId: v1_consultations_list
+      description: |-
+        View لـ "عرض مواعيدي" (GET) أو "حجز موعد جديد" (POST).
+        (Endpoint: GET/POST /api/v1/consultations)
+        (مطابق لتصميم v2.0 ملف 12)
+      tags:
+      - v1
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Consultation'
+          description: ''
+    post:
+      operationId: v1_consultations_create
+      description: |-
+        View لـ "عرض مواعيدي" (GET) أو "حجز موعد جديد" (POST).
+        (Endpoint: GET/POST /api/v1/consultations)
+        (مطابق لتصميم v2.0 ملف 12)
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Consultation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Consultation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Consultation'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Consultation'
+          description: ''
+  /api/v1/doctors/:
+    get:
+      operationId: v1_doctors_list
+      description: |-
+        View لعرض "قائمة كل" الأطباء الموثقين.
+        (Endpoint: GET /api/v1/doctors)
+        (مطابق لتصميم v2.0 ملف 12)
+      tags:
+      - v1
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DoctorList'
+          description: ''
+  /api/v1/doctors/{doctor_id}/availability/:
+    get:
+      operationId: v1_doctors_availability_list
+      description: |-
+        View لعرض "المواعيد المتاحة" (Slots) لدكتور معين.
+        (Endpoint: GET /api/v1/doctors/{id}/availability)
+        (مطابق لتصميم v2.0 ملف 12)
+      parameters:
+      - in: path
+        name: doctor_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - v1
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DoctorAvailabilitySlot'
+          description: ''
+  /api/v1/education/alerts/:
+    get:
+      operationId: v1_education_alerts_list
+      description: 'GET: عرض الإنذارات الصحية النشطة فقط.'
+      tags:
+      - v1
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HealthAlert'
+          description: ''
+  /api/v1/education/guides/:
+    get:
+      operationId: v1_education_guides_list
+      description: 'GET: عرض قائمة الأدلة الصحية (مع إمكانية البحث حسب الفئة).'
+      parameters:
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - v1
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HealthGuide'
+          description: ''
+  /api/v1/education/webinars/:
+    get:
+      operationId: v1_education_webinars_list
+      description: 'GET: عرض الندوات القادمة.'
+      tags:
+      - v1
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Webinar'
+          description: ''
+  /api/v1/inventory/items/:
+    get:
+      operationId: v1_inventory_items_list
+      tags:
+      - v1
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InventoryItem'
+          description: ''
+    post:
+      operationId: v1_inventory_items_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventoryItem'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/InventoryItem'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/InventoryItem'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryItem'
+          description: ''
+  /api/v1/inventory/medical-items/:
+    get:
+      operationId: v1_inventory_medical_items_list
+      parameters:
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - v1
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MedicalItem'
+          description: ''
+  /api/v1/inventory/requests/:
+    get:
+      operationId: v1_inventory_requests_list
+      tags:
+      - v1
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemRequest'
+          description: ''
+    post:
+      operationId: v1_inventory_requests_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ItemRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ItemRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemRequest'
+          description: ''
+  /api/v1/inventory/requests/{id}/fulfill/:
+    put:
+      operationId: v1_inventory_requests_fulfill_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemRequestFulfill'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ItemRequestFulfill'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ItemRequestFulfill'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemRequestFulfill'
+          description: ''
+    patch:
+      operationId: v1_inventory_requests_fulfill_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedItemRequestFulfill'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedItemRequestFulfill'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedItemRequestFulfill'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemRequestFulfill'
+          description: ''
+  /api/v1/ngo/list/:
+    get:
+      operationId: v1_ngo_list_list
+      description: 'GET: عرض كل المنظمات الموثقة (Verified NGOs).'
+      parameters:
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - v1
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NGO'
+          description: ''
+  /api/v1/ngo/missions/:
+    get:
+      operationId: v1_ngo_missions_list
+      description: 'GET: عرض البعثات الطبية القادمة (Surgical Missions Tracker).'
+      parameters:
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - v1
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MedicalMission'
+          description: ''
+  /api/v1/sponsorship/analytics/:
+    get:
+      operationId: v1_sponsorship_analytics_retrieve
+      description: |-
+        Endpoint جديد لعرض إحصائيات النظام باستخدام SQL مباشر.
+        (يستخدم cursor.execute لأنه ما بنرجع Model، بنرجع أرقام بس).
+      tags:
+      - v1
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/v1/sponsorship/cases/:
+    get:
+      operationId: v1_sponsorship_cases_list
+      tags:
+      - v1
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SponsorshipCase'
+          description: ''
+    post:
+      operationId: v1_sponsorship_cases_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SponsorshipCase'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SponsorshipCase'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SponsorshipCase'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SponsorshipCase'
+          description: ''
+  /api/v1/sponsorship/cases/{case_id}/donate/:
+    post:
+      operationId: v1_sponsorship_cases_donate_create
+      parameters:
+      - in: path
+        name: case_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Donation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Donation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Donation'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Donation'
+          description: ''
+  /api/v1/sponsorship/cases/{case_id}/transparency/:
+    get:
+      operationId: v1_sponsorship_cases_transparency_list
+      parameters:
+      - in: path
+        name: case_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - v1
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExpenseReceipt'
+          description: ''
+  /api/v1/sponsorship/cases/{id}/:
+    get:
+      operationId: v1_sponsorship_cases_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - v1
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SponsorshipCase'
+          description: ''
+  /api/v1/sponsorship/emergency-approve/:
+    post:
+      operationId: v1_sponsorship_emergency_approve_create
+      description: |-
+        Endpoint للطوارئ: يقوم بالموافقة (Verify) على كل الحالات "الجراحية" (SURGERY) دفعة واحدة.
+        (مثال قوي على جملة UPDATE).
+      tags:
+      - v1
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/v1/support/chat/{session_id}/messages/:
+    get:
+      operationId: v1_support_chat_messages_list
+      parameters:
+      - in: path
+        name: session_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnonymousChatMessage'
+          description: ''
+    post:
+      operationId: v1_support_chat_messages_create
+      parameters:
+      - in: path
+        name: session_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnonymousChatMessage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AnonymousChatMessage'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AnonymousChatMessage'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnonymousChatMessage'
+          description: ''
+  /api/v1/support/chat/start/:
+    post:
+      operationId: v1_support_chat_start_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnonymousChatSession'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AnonymousChatSession'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AnonymousChatSession'
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnonymousChatSession'
+          description: ''
+  /api/v1/support/groups/:
+    get:
+      operationId: v1_support_groups_list
+      tags:
+      - v1
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SupportGroup'
+          description: ''
+components:
+  schemas:
+    AnonymousChatMessage:
+      type: object
+      description: إرسال واستقبال الرسائل.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        content:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+        sender_role:
+          type: string
+          readOnly: true
+      required:
+      - content
+      - id
+      - sender_role
+      - timestamp
+    AnonymousChatSession:
+      type: object
+      description: بدء جلسة دردشة جديدة.
+      properties:
+        session_id:
+          type: string
+          format: uuid
+          readOnly: true
+        doctor:
+          allOf:
+          - $ref: '#/components/schemas/DoctorList'
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/AnonymousChatSessionStatusEnum'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - doctor
+      - session_id
+    AnonymousChatSessionStatusEnum:
+      enum:
+      - ACTIVE
+      - ENDED
+      type: string
+      description: |-
+        * `ACTIVE` - Active
+        * `ENDED` - Ended
+    CategoryEnum:
+      enum:
+      - NUTRITION
+      - MATERNAL
+      - CHRONIC
+      - FIRST_AID
+      - MENTAL
+      type: string
+      description: |-
+        * `NUTRITION` - Nutrition
+        * `MATERNAL` - Maternal Care
+        * `CHRONIC` - Chronic Diseases
+        * `FIRST_AID` - First Aid
+        * `MENTAL` - Mental Health
+    Consultation:
+      type: object
+      description: Serializer لحجز (POST) وعرض (GET) الاستشارة.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        patient:
+          allOf:
+          - $ref: '#/components/schemas/PublicUserDisplay'
+          readOnly: true
+        doctor:
+          allOf:
+          - $ref: '#/components/schemas/DoctorList'
+          readOnly: true
+        status:
+          type: string
+          readOnly: true
+          default: BOOKED
+        consultation_type:
+          $ref: '#/components/schemas/ConsultationTypeEnum'
+        availability_slot_id:
+          type: integer
+          writeOnly: true
+      required:
+      - availability_slot_id
+      - doctor
+      - id
+      - patient
+      - status
+    ConsultationTypeEnum:
+      enum:
+      - VIDEO
+      - AUDIO_ONLY
+      - MESSAGING
+      type: string
+      description: |-
+        * `VIDEO` - Video Call
+        * `AUDIO_ONLY` - Audio Only
+        * `MESSAGING` - Asynchronous Messaging
+    DoctorAvailabilitySlot:
+      type: object
+      description: Serializer لعرض "فتحات" المواعيد المتاحة للدكتور.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        start_time:
+          type: string
+          format: date-time
+          readOnly: true
+        end_time:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - end_time
+      - id
+      - start_time
+    DoctorList:
+      type: object
+      description: |-
+        Serializer (آمن) لعرض قائمة الأطباء.
+        (مطابق لتصميم v2.0 ملف 13، سيريالايزر 2.A)
+      properties:
+        user:
+          allOf:
+          - $ref: '#/components/schemas/PublicUserDisplay'
+          readOnly: true
+        specialty:
+          type: string
+          readOnly: true
+        is_international:
+          type: boolean
+          readOnly: true
+        is_verified:
+          type: boolean
+          readOnly: true
+        languages:
+          type: array
+          items:
+            type: string
+          readOnly: true
+      required:
+      - is_international
+      - is_verified
+      - languages
+      - specialty
+      - user
+    DoctorProfile:
+      type: object
+      description: |-
+        Serializer لملف الطبيب.
+        (حسب تصميم v2.0 ملف 13، [cite: 106])
+      properties:
+        specialty:
+          type: string
+          maxLength: 255
+        is_international:
+          type: boolean
+        language_ids:
+          type: array
+          items:
+            type: integer
+          writeOnly: true
+      required:
+      - specialty
+    Donation:
+      type: object
+      description: Serializer للتبرع (Donation).
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        donor:
+          allOf:
+          - $ref: '#/components/schemas/UserDisplay'
+          readOnly: true
+        case_id:
+          type: integer
+          writeOnly: true
+        case:
+          allOf:
+          - $ref: '#/components/schemas/SponsorshipCase'
+          readOnly: true
+        timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - amount
+      - case
+      - case_id
+      - donor
+      - id
+      - timestamp
+    ExpenseReceipt:
+      type: object
+      description: Serializer لعرض إيصالات الشفافية.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        description:
+          type: string
+          maxLength: 255
+        receipt_url:
+          type: string
+          format: uri
+          maxLength: 200
+        patient_feedback:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        case:
+          type: integer
+      required:
+      - case
+      - created_at
+      - description
+      - id
+      - receipt_url
+    HealthAlert:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        message:
+          type: string
+        severity:
+          $ref: '#/components/schemas/SeverityEnum'
+        location:
+          type: string
+          nullable: true
+          maxLength: 255
+        is_active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - id
+      - message
+      - title
+    HealthGuide:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        content:
+          type: string
+        category:
+          $ref: '#/components/schemas/CategoryEnum'
+        is_visual:
+          type: boolean
+        video_url:
+          type: string
+          format: uri
+          nullable: true
+          maxLength: 200
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - category
+      - content
+      - created_at
+      - id
+      - title
+    InventoryItem:
+      type: object
+      description: عرض وإضافة المخزون (للموزعين).
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        item:
+          allOf:
+          - $ref: '#/components/schemas/MedicalItem'
+          readOnly: true
+        item_id:
+          type: integer
+          writeOnly: true
+        distributor:
+          allOf:
+          - $ref: '#/components/schemas/UserDisplay'
+          readOnly: true
+        quantity:
+          type: integer
+          maximum: 4294967295
+          minimum: 0
+          format: int64
+        expiry_date:
+          type: string
+          format: date
+          nullable: true
+        location:
+          type: string
+          maxLength: 255
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - distributor
+      - id
+      - item
+      - item_id
+      - location
+      - quantity
+    ItemRequest:
+      type: object
+      description: |-
+        للمريض: إنشاء طلب جديد.
+        للـ NGO: عرض الطلبات.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        patient:
+          allOf:
+          - $ref: '#/components/schemas/UserDisplay'
+          readOnly: true
+        item:
+          allOf:
+          - $ref: '#/components/schemas/MedicalItem'
+          readOnly: true
+        item_id:
+          type: integer
+          writeOnly: true
+        quantity_needed:
+          type: integer
+          maximum: 4294967295
+          minimum: 0
+          format: int64
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusE91Enum'
+          readOnly: true
+        fulfilled_by:
+          allOf:
+          - $ref: '#/components/schemas/UserDisplay'
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - fulfilled_by
+      - id
+      - item
+      - item_id
+      - patient
+      - status
+    ItemRequestFulfill:
+      type: object
+      description: خاص بالـ NGO لتغيير حالة الطلب (تلبية الطلب).
+      properties:
+        status:
+          $ref: '#/components/schemas/StatusE91Enum'
+    ItemTypeEnum:
+      enum:
+      - MEDICINE
+      - EQUIPMENT
+      type: string
+      description: |-
+        * `MEDICINE` - Medicine
+        * `EQUIPMENT` - Medical Equipment
+    MedicalItem:
+      type: object
+      description: عرض تفاصيل الدواء/المعدة (للقراءة فقط).
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        item_type:
+          $ref: '#/components/schemas/ItemTypeEnum'
+        description:
+          type: string
+          nullable: true
+      required:
+      - id
+      - item_type
+      - name
+    MedicalMission:
+      type: object
+      description: عرض تفاصيل البعثة الطبية.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        ngo:
+          allOf:
+          - $ref: '#/components/schemas/NGO'
+          readOnly: true
+        mission_type:
+          $ref: '#/components/schemas/MissionTypeEnum'
+        description:
+          type: string
+        location:
+          type: string
+          maxLength: 255
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        specialties_available:
+          type: string
+          description: e.g., Orthopedics, Ophthalmology
+      required:
+      - description
+      - end_date
+      - id
+      - location
+      - mission_type
+      - ngo
+      - specialties_available
+      - start_date
+      - title
+    MissionTypeEnum:
+      enum:
+      - SURGERY
+      - MOBILE_CLINIC
+      - TRAINING
+      - FIELD_HOSPITAL
+      type: string
+      description: |-
+        * `SURGERY` - Surgery Camp
+        * `MOBILE_CLINIC` - Mobile Clinic
+        * `TRAINING` - Medical Training
+        * `FIELD_HOSPITAL` - Field Hospital
+    NGO:
+      type: object
+      description: عرض تفاصيل المنظمة.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        website:
+          type: string
+          format: uri
+          nullable: true
+          maxLength: 200
+        logo:
+          type: string
+          format: uri
+          nullable: true
+          maxLength: 200
+        is_verified:
+          type: boolean
+      required:
+      - description
+      - id
+      - name
+    PatchedItemRequestFulfill:
+      type: object
+      description: خاص بالـ NGO لتغيير حالة الطلب (تلبية الطلب).
+      properties:
+        status:
+          $ref: '#/components/schemas/StatusE91Enum'
+    PatchedUserDisplay:
+      type: object
+      description: |-
+        Serializer لعرض بيانات المستخدم (ملفي الشخصي).
+        (حسب تصميم v2.0 ملف 13، [cite: 114])
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        email:
+          type: string
+          format: email
+          readOnly: true
+        first_name:
+          type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+        roles:
+          type: string
+          readOnly: true
+        patient_profile:
+          allOf:
+          - $ref: '#/components/schemas/PatientProfile'
+          readOnly: true
+        doctor_profile:
+          allOf:
+          - $ref: '#/components/schemas/DoctorProfile'
+          readOnly: true
+    PatientProfile:
+      type: object
+      description: |-
+        Serializer لملف المريض.
+        (حسب تصميم v2.0 ملف 13، [cite: 101])
+      properties:
+        location:
+          type: string
+          nullable: true
+          maxLength: 255
+        medical_history:
+          type: string
+          nullable: true
+        consent_given:
+          type: boolean
+    PublicUserDisplay:
+      type: object
+      description: |-
+        Serializer (آمن) لعرض بيانات المستخدم "العامة" فقط (الاسم).
+        رح نستخدمه جوا DoctorListSerializer.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+      required:
+      - first_name
+      - last_name
+    SeverityEnum:
+      enum:
+      - LOW
+      - MEDIUM
+      - HIGH
+      - CRITICAL
+      type: string
+      description: |-
+        * `LOW` - Low
+        * `MEDIUM` - Medium
+        * `HIGH` - High
+        * `CRITICAL` - Critical
+    SponsorshipCase:
+      type: object
+      description: Serializer لعرض وإنشاء حالات الكفالة.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        patient:
+          allOf:
+          - $ref: '#/components/schemas/UserDisplay'
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        treatment_type:
+          $ref: '#/components/schemas/TreatmentTypeEnum'
+        description:
+          type: string
+        donation_goal:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        current_donated_amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          readOnly: true
+        is_verified:
+          type: boolean
+          readOnly: true
+        status:
+          type: string
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - current_donated_amount
+      - description
+      - donation_goal
+      - id
+      - is_verified
+      - patient
+      - status
+      - title
+      - treatment_type
+    StatusE91Enum:
+      enum:
+      - PENDING
+      - FULFILLED
+      - DELIVERED
+      - CANCELLED
+      type: string
+      description: |-
+        * `PENDING` - Pending
+        * `FULFILLED` - Fulfilled
+        * `DELIVERED` - Delivered
+        * `CANCELLED` - Cancelled
+    SupportGroup:
+      type: object
+      description: عرض مجموعات الدعم.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        moderator_name:
+          type: string
+          readOnly: true
+        meeting_link:
+          type: string
+          format: uri
+          nullable: true
+          maxLength: 200
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - description
+      - id
+      - moderator_name
+      - name
+    TokenObtainPair:
+      type: object
+      properties:
+        email:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          readOnly: true
+      required:
+      - access
+      - email
+      - password
+      - refresh
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          writeOnly: true
+      required:
+      - access
+      - refresh
+    TreatmentTypeEnum:
+      enum:
+      - SURGERY
+      - CANCER
+      - DIALYSIS
+      - MEDICATION
+      - REHAB
+      type: string
+      description: |-
+        * `SURGERY` - Surgery
+        * `CANCER` - Cancer Treatment
+        * `DIALYSIS` - Dialysis
+        * `MEDICATION` - Chronic Medication
+        * `REHAB` - Physical Rehabilitation
+    UserDisplay:
+      type: object
+      description: |-
+        Serializer لعرض بيانات المستخدم (ملفي الشخصي).
+        (حسب تصميم v2.0 ملف 13، [cite: 114])
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        email:
+          type: string
+          format: email
+          readOnly: true
+        first_name:
+          type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+        roles:
+          type: string
+          readOnly: true
+        patient_profile:
+          allOf:
+          - $ref: '#/components/schemas/PatientProfile'
+          readOnly: true
+        doctor_profile:
+          allOf:
+          - $ref: '#/components/schemas/DoctorProfile'
+          readOnly: true
+      required:
+      - doctor_profile
+      - email
+      - first_name
+      - id
+      - last_name
+      - patient_profile
+      - roles
+    UserRegistration:
+      type: object
+      description: |-
+        Serializer لتسجيل مستخدم جديد.
+        (حسب تصميم v2.0 ملف 13، [cite: 92])
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        password:
+          type: string
+          writeOnly: true
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        roles:
+          type: array
+          items:
+            type: integer
+          writeOnly: true
+        patient_profile:
+          allOf:
+          - $ref: '#/components/schemas/PatientProfile'
+          writeOnly: true
+        doctor_profile:
+          allOf:
+          - $ref: '#/components/schemas/DoctorProfile'
+          writeOnly: true
+      required:
+      - email
+      - first_name
+      - last_name
+      - password
+      - roles
+    Webinar:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        speaker:
+          type: string
+          maxLength: 255
+        date_time:
+          type: string
+          format: date-time
+        meeting_link:
+          type: string
+          format: uri
+          maxLength: 200
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - date_time
+      - description
+      - id
+      - meeting_link
+      - speaker
+      - title
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
