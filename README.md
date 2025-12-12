@@ -1,157 +1,143 @@
-🩺 HealthPal – Digital Healthcare Platform
+<h1 align="center">🩺 HealthPal</h1>
 
-HealthPal is a backend healthcare platform designed to facilitate medical consultations, inventory management, sponsorships, and support services in an organized and transparent way.
-The system aims to improve accessibility to healthcare resources through digital solutions, enabling efficient management of users, medical services, and donations.
+<p align="center">
+  Digital Healthcare Platform
+</p>
 
-📌 Table of Contents
+<p align="center">
+  HealthPal is a backend healthcare platform designed to facilitate medical consultations,
+  inventory management, sponsorships, and support services in a secure, organized,
+  and transparent digital environment.
+</p>
 
-About the Project
+<p align="center">
+  👾 <a href="#">View Demo</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+  🐞 <a href="#">Report Bug</a>
+</p>
 
-Core Features
+---
 
-User Roles
+## 📌 Table of Contents
+- [About the Project](#about-the-project)
+- [Core Features](#core-features)
+- [User Roles](#user-roles)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+- [API Documentation](#api-documentation)
+- [Demo](#demo)
+- [Team](#team)
 
-Technologies Used
+---
 
-Getting Started
+## 🌟 About the Project
 
-API Documentation
+HealthPal is a comprehensive backend system built to support healthcare-related services through a modular and scalable architecture.  
+The platform connects doctors, patients, sponsors, and administrators while ensuring secure data handling, role-based access control, and efficient service workflows.
 
-Demo
+The system was designed following layered architecture principles and software engineering best practices, enabling maintainability, scalability, and clear separation of concerns across modules.
 
-Team
+---
 
-🌟 About the Project
+## 🚀 Core Features
 
-HealthPal is a comprehensive backend system built to support healthcare-related services through a modular and scalable architecture.
-The platform connects doctors, patients, sponsors, and administrators while ensuring secure data handling, role-based access, and efficient service workflows.
+### 🩺 Medical Consultations
+- Schedule and manage doctor–patient consultations
+- Manage doctor availability slots
+- Track consultation history and statuses
 
-The system was designed following layered architecture principles and best practices in software engineering, focusing on maintainability, scalability, and clarity of responsibilities.
+### 📦 Inventory Management
+- Manage medical items and supplies
+- Handle item requests and approvals
+- Track inventory availability and usage
 
-🚀 Core Features
-🩺 Medical Consultations
+### 🤝 Sponsorship & Donations
+- Manage sponsorship cases
+- Track donations and expense receipts
+- Ensure transparency in financial operations
 
-Manage online consultations between patients and doctors
+### 👤 User Management
+- Secure user authentication and authorization
+- Role-based access control using JWT
+- Custom user profiles for doctors and administrators
 
-Doctor availability slots and scheduling
+### 🔐 Security & Access Control
+- JWT-based authentication
+- Permission-based API access
+- Secure handling of sensitive data
 
-Consultation status tracking
+---
 
-📦 Inventory Management
+## 👥 User Roles
 
-Manage medical items and supplies
+- 👨‍⚕️ **Doctor**: Manage availability and consultations  
+- 🧑‍⚕️ **Patient**: Request and attend consultations  
+- 🎗️ **Sponsor**: Support medical and humanitarian cases  
+- 🧾 **Administrator**: Manage users, inventory, sponsorships, and system data  
 
-Track inventory availability
+---
 
-Handle item requests efficiently
+## 🔨 Technologies Used
 
-🤝 Sponsorships & Donations
+- **Django** – Backend web framework  
+- **Django REST Framework** – RESTful API development  
+- **JWT (SimpleJWT)** – Authentication and authorization  
+- **MySQL** – Relational database  
+- **Docker & Docker Compose** – Containerized development environment  
+- **Postman** – API testing and documentation  
+- **GitHub** – Version control and collaboration  
 
-Manage sponsorship cases
+---
 
-Track donations and expense receipts
+## ⚙️ Getting Started
 
-Ensure transparency and accountability
+### 🧩 Prerequisites
+Make sure you have the following installed:
+- Docker
+- Docker Compose
+- Git
 
-👤 User Management
+### 🚀 Running the Project
 
-Custom user model
-
-Role-based access control
-
-Secure authentication system
-
-🛡️ Security & Architecture
-
-JWT-based authentication
-
-Modular Django apps
-
-Environment-based configuration using .env
-
-👥 User Roles
-
-👨‍⚕️ Doctor – Provides medical consultations
-
-👤 Patient – Requests consultations and services
-
-🤝 Sponsor – Supports medical cases and donations
-
-🛠️ Admin – Manages the platform and oversees operations
-
-🔨 Technologies Used
-
-Python – Core programming language
-
-Django – Backend web framework
-
-Django REST Framework (DRF) – API development
-
-MySQL – Relational database
-
-Docker & Docker Compose – Containerization
-
-JWT (SimpleJWT) – Authentication
-
-Postman – API testing & documentation
-
-GitHub – Version control and collaboration
-
-⚙️ Getting Started
-🔹 Prerequisites
-
-Make sure you have installed:
-
-Python 3.10+
-
-Docker & Docker Compose
-
-Git
-
-🔹 Running the Project (Docker)
-
-1️⃣ Clone the repository:
-
-git clone https://github.com/danasharaqa7/healthpal.git
+1. Clone the repository:
+```bash
+git clone https://github.com/your-username/healthpal.git
 cd healthpal
+Create an .env file in the project root and configure environment variables:
 
-
-2️⃣ Create a .env file in the root directory:
-
+env
+Copy code
 DEBUG=True
 SECRET_KEY=your_secret_key
 
 DB_NAME=healthpal_db
 DB_USER=healthpal_user
-DB_PASSWORD=healthpal_password
+DB_PASSWORD=your_password
 DB_HOST=db
 DB_PORT=3306
+Build and run the containers:
 
-
-3️⃣ Run the project:
-
+bash
+Copy code
 docker compose up --build
+Apply migrations:
 
-
-4️⃣ Apply migrations:
-
+bash
+Copy code
 docker compose exec backend python manage.py migrate
+Create a superuser:
 
-
-5️⃣ Create superuser:
-
+bash
+Copy code
 docker compose exec backend python manage.py createsuperuser
+Access the application:
 
+Admin Panel: http://localhost:8000/admin
 
-6️⃣ Access the admin panel:
-
-http://localhost:8000/admin
+API Base URL: http://localhost:8000/api
 
 📝 API Documentation
-
 Our API is fully documented and accessible through Postman, providing a detailed guide for all endpoints.
-You can view the latest API documentation here
- once the backend is live.
+You can view the latest API documentation here once the backend is live.
 
 The documentation includes:
 
@@ -161,19 +147,17 @@ Request parameters
 
 Response formats
 
-Example requests
+Practical usage examples
 
 📸 Demo
-
 Get a firsthand look at HealthPal in action!
 🚀 View Demo
 
 👩‍💻 Team
+Dana sharaqa
+Tala Alhendi
+Mustafa Ahmad
 
-Dana
+[Add other team members here]
 
-Tala
-
-(Add remaining team members if needed)
-
-✨ HealthPal was developed as part of an Advanced Software Engineering project, applying modern backend development practices and collaborative workflows.
+<p align="center"> Built with ❤️ for Advanced Software Engineering </p> ```
