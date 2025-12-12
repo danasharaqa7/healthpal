@@ -1,8 +1,13 @@
 <h1 align="center">🩺 HealthPal – Digital Healthcare Platform</h1>
 
 <p align="center">
-A modular backend healthcare platform designed to streamline medical consultations, inventory management, sponsorships, and support services through secure and scalable digital solutions.
+<strong>HealthPal</strong> is a digital healthcare backend platform designed to support and strengthen healthcare services in Palestine, especially in environments facing limited resources and system disruptions.  
+The platform provides a unified and secure digital infrastructure for medical consultations, treatment sponsorships, medication coordination, and community health support.
+<br/><br/>
+HealthPal connects patients, doctors, donors, NGOs, and healthcare administrators through scalable APIs, enabling transparent service workflows, efficient resource management, and improved access to essential medical care.  
+Built with a focus on reliability, modularity, and security, the system aims to leverage technology to enhance healthcare accessibility and resilience within the Palestinian context.
 </p>
+
 
 <p align="center">
 🚀 <a href="#-demo">View Demo</a> 
@@ -100,28 +105,34 @@ DB_HOST=db
 DB_PORT=3306
 ```
 #### 3️⃣ Build & run containers
-bash
+
+```bash
 Copy code
 docker compose up --build
+```
 #### 4️⃣ Apply migrations
-bash
+```bash
 Copy code
 docker compose exec backend python manage.py migrate
+```
 #### 5️⃣ Create superuser
-bash
+```bash
 Copy code
 docker compose exec backend python manage.py createsuperuser
+```
 #### 6️⃣ Access the application
-Admin Panel: http://localhost:8000/admin
+```
+Admin Panel: http://localhost:8001/admin
 
-API Base URL: http://localhost:8000/api
+API Base URL: http://localhost:8001/api
+```
 
 ## 📝 API Documentation
 
 Our API is fully documented using **Swagger**, providing an interactive and clear overview of all available endpoints.
 
 Once the backend is running, you can access the documentation here:  
-👉 **Swagger UI:** http://localhost:8000/api/schema/swagger-ui/
+👉 **Swagger UI:** [http://localhost:8001/api/schema/swagger-ui/](http://localhost:8001/api/schema/swagger-ui/)
 
 The documentation includes:
 - Endpoint descriptions  
@@ -132,15 +143,16 @@ The documentation includes:
 ## 📸 Demo
 
 Get a firsthand look at **HealthPal** in action 🚀  
-👉 **View Demo:** *(Add demo video link here)*
+👉 **View Demo:**  
+[Watch the demo video](https://drive.google.com/drive/folders/18fRbzJmQLBays6ecs-vQwiIg_OGVRoZ1?usp=sharing)
 
 ## 👩‍💻 Team
 
 - **Dana Sharaqa**  
-  📧 [dana.sharaqa@example.com](mailto:dana.sharaqa@example.com)
+  📧 [danasharaqan1@gmail.com](mailto:danasharaqan1@gmail.com)
 
 - **Tala Alhendi**  
-  📧 [tala.alhendi@example.com](mailto:tala.alhendi@example.com)
+  📧 [talaalhendiuni4@gmail.com.com](mailto:talaalhendiuni4@gmail.com)
 
 - **Mustafa Ahmad**  
-  📧 [mustafa.ahmad@example.com](mailto:mustafa.ahmad@example.com)
+  📧 [3tnawi.3tm@gmail.com](mailto:3tnawi.3tm@gmail.com)
