@@ -5,7 +5,7 @@ A modular backend healthcare platform designed to streamline medical consultatio
 </p>
 
 <p align="center">
-🚀 <a href="#-demo">View Demo</a> • 🐞 <a href="https://github.com/danasharaqa7/healthpal/issues">Report Bug</a>
+🚀 <a href="#-demo">View Demo</a> 
 </p>
 
 ---
@@ -114,29 +114,31 @@ Admin Panel: http://localhost:8000/admin
 
 API Base URL: http://localhost:8000/api
 
-📝 API Documentation
-Our API is fully documented using Swagger.
+## 📝 API Documentation
 
-Once the backend is running, access the documentation here:
-👉 Swagger UI: http://localhost:8000/api/schema/swagger-ui/
+Our API is fully documented using **Swagger**, providing an interactive and clear overview of all available endpoints.
+
+Once the backend is running, you can access the documentation here:  
+👉 **Swagger UI:** http://localhost:8000/api/schema/swagger-ui/
 
 The documentation includes:
+- Endpoint descriptions  
+- Request parameters  
+- Response formats  
+- Practical usage examples  
 
-Endpoint descriptions
+## 📸 Demo
 
-Request parameters
+Get a firsthand look at **HealthPal** in action 🚀  
+👉 **View Demo:** *(Add demo video link here)*
 
-Response formats
+## 👩‍💻 Team
 
-Practical usage examples
+- **Dana Sharaqa**  
+  📧 [dana.sharaqa@example.com](mailto:dana.sharaqa@example.com)
 
-📸 Demo
-Get a firsthand look at HealthPal in action 🚀
-👉 View Demo: (Add demo video link here)
+- **Tala Alhendi**  
+  📧 [tala.alhendi@example.com](mailto:tala.alhendi@example.com)
 
-👩‍💻 Team
-Dana Sharaqa – Email
-
-Tala Alhendi – Email
-
-Mustafa Ahmad – Email
+- **Mustafa Ahmad**  
+  📧 [mustafa.ahmad@example.com](mailto:mustafa.ahmad@example.com)
