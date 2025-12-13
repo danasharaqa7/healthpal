@@ -9,7 +9,8 @@ It streamlines consultations, inventory management, sponsorships, and support se
 <p align="center">
 🚀 <a href="#-demo">View Demo</a> 
 </p>
----
+
+
 <details>
   <summary><strong>📌 Table of Contents</strong></summary>
 
